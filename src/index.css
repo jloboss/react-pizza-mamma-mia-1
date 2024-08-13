@@ -1,0 +1,13 @@
+footer {
+  background-color: #333;
+  padding-top: 25px;
+  text-align: center;
+  color: white;
+}
+.mnu_pizza {
+  text-align: center;
+}
+.tit_header,
+p {
+  text-align: center;
+}
