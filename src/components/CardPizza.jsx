@@ -7,7 +7,9 @@ const CardPizza = ({ name, price, image, ingredients }) => {
         <p className="card-text">
           <strong>Precio: ${price}</strong>
         </p>
-        <p className="card-text">Ingredientes: {ingredients.join(", ")}</p>
+        <p className="card-text">
+          <strong>Ingredientes:</strong> {ingredients.join(", ")}
+        </p>
         <div className="d-flex justify-content-around">
           <a href="#" className="btn btn-primary bg-white text-dark">
             Ver más 👀
