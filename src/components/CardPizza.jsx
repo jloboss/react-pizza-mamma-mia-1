@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 const CardPizza = ({ name, price, image, ingredients }) => {
   return (
     <div className="card">
@@ -11,9 +12,12 @@ const CardPizza = ({ name, price, image, ingredients }) => {
           <strong>Ingredientes:</strong> {ingredients.join(", ")}
         </p>
         <div className="d-flex justify-content-around">
-          <a href="#" className="btn btn-primary bg-white text-dark">
+          <Link
+            to="/react-pizza-mamma-mia-1/Pizza/p001"
+            className="btn btn-primary bg-white text-dark"
+          >
             Ver más 👀
-          </a>
+          </Link>
           <a href="#" className="btn btn-primary bg-dark">
             Añadir 🛒
           </a>

@@ -1,68 +1,73 @@
-import "bootstrap/dist/css/bootstrap.min.css";
+import { Navbar, Nav, Button, Container } from "react-bootstrap";
+import { formatCurrency } from "../helpers/format";
+import { Link } from "react-router-dom";
 
-const Navbar = () => {
+function NavbarApp() {
   const total = 25000;
-  const token = true;
-
-  /*https://www.w3schools.com/jsref/jsref_tolocalestring_number.asp*/
-  const nuevototal = total.toLocaleString("es-CL", {
-    style: "currency",
-    currency: "CLP",
-    minimumFractionDigits: 0,
-  });
+  const token = false;
 
   return (
-    <nav className="navbar navbar-expand-lg bg-dark">
-      <div className="container-fluid">
-        <a className="navbar-brand text-light" href="#">
-          Pizzería Mamma Mia!
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <a
-                className="nav-link active text-light"
-                aria-current="page"
-                href="#"
-              >
-                🍕 Home
-              </a>
-            </li>
+    <Navbar bg="dark" data-bs-theme="dark">
+      <Container className="d-flex justify-content-between align-items-center">
+        <Nav className="d-flex align-items-center gap-2">
+          <p className="text-light bg-dark">Pizzería Mamma Mia!</p>
 
-            <li className="nav-item">
-              <a className="nav-link text-light" href="#">
-                {" "}
-                {token ? "🔓 Profile" : "🔒 Register"}
-              </a>
-            </li>
+          <Link to="/react-pizza-mamma-mia-1/">
+            <Button className="btn-sm" variant="outline-light" href="#home">
+              🍕Home
+            </Button>
+          </Link>
 
-            <li className="nav-item">
-              <a className="nav-link text-light" href="#">
-                {" "}
-                {token ? "🔐 Logout" : "🔐 Login"}
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div className="text-end">
-          <a className="nav-link text-light" href="#">
-            🛒 Total: {nuevototal}
-          </a>
-        </div>
-      </div>
-    </nav>
+          {token ? (
+            <>
+              <Link to="/react-pizza-mamma-mia-1/Profile">
+                <Button
+                  className="btn-sm"
+                  variant="outline-light"
+                  href="#profile"
+                >
+                  🔓Profile
+                </Button>
+              </Link>
+
+              <Button className="btn-sm" variant="outline-light" href="#Logout">
+                🔒Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <Link to="/react-pizza-mamma-mia-1/Login">
+                <Button
+                  className="btn-sm"
+                  variant="outline-light"
+                  href="#Login"
+                >
+                  🔐Login
+                </Button>
+              </Link>
+              <Link to="/react-pizza-mamma-mia-1/Register">
+                <Button
+                  className="btn-sm"
+                  variant="outline-light"
+                  href="#register"
+                >
+                  🔐Register
+                </Button>
+              </Link>
+            </>
+          )}
+        </Nav>
+
+        {token && (
+          <Link to="/react-pizza-mamma-mia-1/Cart">
+            <Button className="btn-sm" variant="outline-light" href="#total">
+              🛒Total: {formatCurrency(total)}
+            </Button>
+          </Link>
+        )}
+      </Container>
+    </Navbar>
   );
-};
+}
 
-export default Navbar;
+export default NavbarApp;

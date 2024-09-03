@@ -1,8 +1,9 @@
-import Header from "./Header";
-import CardPizza from "./CardPizza";
+import Header from "../components/Header";
+import CardPizza from "../components/CardPizza";
 import { Row, Col } from "react-bootstrap";
 //import { menuPizza } from "../pizzas";
 import { useEffect, useState } from "react";
+
 const Home = () => {
   const [api, setApi] = useState([]);
 

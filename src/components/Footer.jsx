@@ -1,9 +1,17 @@
-const Footer = () => {
+import React from "react";
+
+function Footer() {
   return (
-    <footer>
-      <p>© 2021 - Pizzería Mamma Mia! - Todos los derechos reservados</p>
-    </footer>
+    <>
+      <div className="pt-3">
+        <div className="bg-dark">
+          <p className="text-white d-flex justify-content-center pt-3 pb-3 ">
+            © 2024 - Pizzería Mamma Mia! - Todos los derechos reservados
+          </p>
+        </div>
+      </div>
+    </>
   );
-};
+}
 
 export default Footer;
