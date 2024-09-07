@@ -1,9 +1,11 @@
 import { Navbar, Nav, Button, Container } from "react-bootstrap";
 import { formatCurrency } from "../helpers/format";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 function NavbarApp() {
-  const total = 25000;
+  const { total } = useContext(CartContext);
   const token = false;
 
   return (
@@ -58,7 +60,7 @@ function NavbarApp() {
           )}
         </Nav>
 
-        {token && (
+        {!token && (
           <Link to="/react-pizza-mamma-mia-1/Cart">
             <Button className="btn-sm" variant="outline-light" href="#total">
               🛒Total: {formatCurrency(total)}

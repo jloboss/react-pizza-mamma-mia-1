@@ -1,5 +1,13 @@
 import { Link } from "react-router-dom";
-const CardPizza = ({ name, price, image, ingredients }) => {
+import { CartContext } from "../context/CartContext";
+import { useContext } from "react";
+import { Button } from "react-bootstrap";
+const CardPizza = ({ name, price, image, ingredients, id }) => {
+  const { increaseQuantity } = useContext(CartContext);
+  const handleAddClick = () => {
+    const pizza = { name, price, image, ingredients, id };
+    increaseQuantity(pizza);
+  };
   return (
     <div className="card">
       <img src={image} className="card-img-top" alt={name} />
@@ -18,9 +26,9 @@ const CardPizza = ({ name, price, image, ingredients }) => {
           >
             Ver más 👀
           </Link>
-          <a href="#" className="btn btn-primary bg-dark">
+          <Button variant="success" onClick={handleAddClick}>
             Añadir 🛒
-          </a>
+          </Button>
         </div>
       </div>
     </div>
