@@ -3,10 +3,12 @@ import { formatCurrency } from "../helpers/format";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import { UserContext } from "../context/UserContext"; // nueva linea
 
 function NavbarApp() {
   const { total } = useContext(CartContext);
-  const token = false;
+  const { token, logout } = useContext(UserContext); //nueva linea
+  //const token = false;
 
   return (
     <Navbar bg="dark" data-bs-theme="dark">
@@ -32,7 +34,7 @@ function NavbarApp() {
                 </Button>
               </Link>
 
-              <Button className="btn-sm" variant="outline-light" href="#Logout">
+              <Button className="btn-sm" variant="outline-light" onClick={logout}>
                 🔒Logout
               </Button>
             </>
@@ -60,13 +62,13 @@ function NavbarApp() {
           )}
         </Nav>
 
-        {!token && (
-          <Link to="/react-pizza-mamma-mia-1/Cart">
-            <Button className="btn-sm" variant="outline-light" href="#total">
-              🛒Total: {formatCurrency(total)}
-            </Button>
-          </Link>
-        )}
+
+        <Link to="/react-pizza-mamma-mia-1/Cart">
+          <Button className="btn-sm" variant="outline-light" href="#total">
+            🛒Total: {formatCurrency(total)}
+          </Button>
+        </Link>
+
       </Container>
     </Navbar>
   );

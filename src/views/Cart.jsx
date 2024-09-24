@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import { UserContext } from "../context/UserContext";
 
 const Cart = () => {
   const { cart, increaseQuantity, total, decreaseQuantity } =
     useContext(CartContext);
+  const { token } = useContext(UserContext);
   return (
     <div className="cart">
       <h1>Productos</h1>
@@ -28,7 +30,13 @@ const Cart = () => {
       <div className="total">
         <h2>Total: </h2>${total}
       </div>
-      <button className="pay-button">Pagar</button>
+      {token ? (
+        <button className="pay-button">Pagar</button>
+      ) : (
+        <h2>Debes iniciar sesión para pagar</h2>
+      )
+      }
+
     </div>
   );
 };

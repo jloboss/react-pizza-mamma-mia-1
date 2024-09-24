@@ -21,7 +21,8 @@ const CardPizza = ({ name, price, image, ingredients, id }) => {
         </p>
         <div className="d-flex justify-content-around">
           <Link
-            to="/react-pizza-mamma-mia-1/Pizza/p001"
+            to={`/react-pizza-mamma-mia-1/Pizza/${id}`} // nueva linea
+
             className="btn btn-primary bg-white text-dark"
           >
             Ver más 👀
@@ -31,7 +32,7 @@ const CardPizza = ({ name, price, image, ingredients, id }) => {
           </Button>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

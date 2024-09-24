@@ -1,19 +1,26 @@
 import Header from "./Header";
 import { useEffect, useState } from "react";
 import CardPizza from "./CardPizza";
+import { useParams } from 'react-router-dom'; // nueva linea
 
 function Pizzas() {
   const [pizza, setPizza] = useState({});
+  const { id } = useParams();
 
   useEffect(() => {
+    console.log('ID: ' + id);
+
     getPizza();
+
   }, []);
 
   const getPizza = async () => {
-    const res = await fetch("http://localhost:5000/api/pizzas/p001");
+
+    const res = await fetch(`http://localhost:5000/api/pizzas/${id}`); // nueva linea
     const pizzaData = await res.json();
 
     setPizza(pizzaData);
+
   };
 
   return (
@@ -23,6 +30,7 @@ function Pizzas() {
       <div className="mt-5 d-flex justify-content-center">
         {Object.keys(pizza).length > 0 && (
           <CardPizza
+            id={pizza.id} // nueva linea
             desc={pizza.desc}
             name={pizza.name}
             price={pizza.price}
