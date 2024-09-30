@@ -8,7 +8,7 @@ import { UserContext } from "../context/UserContext"; // nueva linea
 function NavbarApp() {
   const { total } = useContext(CartContext);
   const { token, logout } = useContext(UserContext); //nueva linea
-  //const token = false;
+
 
   return (
     <Navbar bg="dark" data-bs-theme="dark">

@@ -1,8 +1,16 @@
 import { Container, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import imgPicture from "../assets/img/avatar.png";
+import { UserContext } from "../context/UserContext";
+import { useContext, useEffect } from "react";
 
 const Profile = () => {
+  const { profile, user, logout } = useContext(UserContext);
+
+  useEffect(() => {
+    profile();
+  }, []);
+
   return (
     <Container className="d-flex flex-column align-items-center mt-4">
       <Card
@@ -17,11 +25,21 @@ const Profile = () => {
               <strong>Hola 😎 usuario</strong>
             </h2>
             <div></div>
-            <strong>johnny.lobos.sepulveda@gmail.com</strong>
+            <strong>
+              {/* Verifica si user existe y si tiene la propiedad email */}
+              {user ? (
+                <>
+                  <p>{user.email}</p>
+
+                </>
+              ) : (
+                'Cargando perfil...'
+              )}
+            </strong>
           </Card.Title>
 
           <Link to="/react-pizza-mamma-mia-1/">
-            <Button variant="dark">Cerrar Sesión</Button>
+            <Button variant="dark" onClick={logout}>Cerrar Sesión</Button>
           </Link>
         </Card.Body>
       </Card>

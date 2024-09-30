@@ -3,38 +3,46 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../context/UserContext";
 import { Container } from "react-bootstrap";
+import useInput from "../hooks/useInput";
+import { Link } from "react-router-dom";
 
 const Register = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  //const [confirmPassword, setConfirmPassword] = useState("");
+  const email = useInput(""); // customHook
+  const password = useInput(""); // customHook
+  const confirmPassword = useInput(""); // customHook
   const [message, setMessage] = useState("");
   const [variant, setVariant] = useState("success");
+  const { register } = useContext(UserContext);
 
   const validarFormulario = (e) => {
     e.preventDefault();
 
-    if (!email || !password || !confirmPassword) {
+    if (!email.value || !password.value || !confirmPassword.value) {
       setMessage("Todos los campos son obligatorios");
       setVariant("danger");
       return false;
     }
 
-    if (password.length < 6) {
+    if (password.value.length < 6) {
       setMessage("La contraseña debe tener al menos 6 caracteres");
       setVariant("danger");
       return false;
     }
 
-    if (password !== confirmPassword) {
+    if (password.value !== confirmPassword.value) {
       setMessage("Las contraseñas no coinciden");
       setVariant("danger");
       return false;
     }
 
-    setMessage("Registro Exitoso");
+    //setMessage("Registro Exitoso");
+    register(email.value, password.value);
     setVariant("success");
   };
 
@@ -52,7 +60,7 @@ const Register = () => {
                 <Form.Control
                   placeholder="Enter email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  {...email}
                 />
               </Form.Group>
             </ListGroup.Item>
@@ -63,7 +71,7 @@ const Register = () => {
                   type="password"
                   placeholder="Password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  {...password}
                 />
               </Form.Group>
             </ListGroup.Item>
@@ -74,11 +82,14 @@ const Register = () => {
                   type="password"
                   placeholder="Password"
                   value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  {...confirmPassword}
                 />
               </Form.Group>
             </ListGroup.Item>
             <ListGroup.Item className="mb-3 d-flex justify-content-center">
+              <Link variant="link" type="submit" to="/react-pizza-mamma-mia-1/login">
+                Tienes ya una cuenta?
+              </Link>
               <Button variant="primary" type="submit">
                 Login
               </Button>

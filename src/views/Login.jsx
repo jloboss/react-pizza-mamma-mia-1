@@ -3,29 +3,37 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../context/UserContext";
 import { Container } from "react-bootstrap";
+import useInput from "../hooks/useInput";
+import { Link } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  const email = useInput(""); // customHook
+  const password = useInput(""); // customHook
   const [message, setMessage] = useState("");
   const [variant, setVariant] = useState("success");
+  const { login } = useContext(UserContext);
 
   const validarFormulario = (e) => {
     e.preventDefault();
 
-    if (!email || !password) {
+
+    if (!email.value || !password.value) {
       setMessage("Todos los campos son obligatorios");
       setVariant("danger");
       return false;
     }
-    if (password.length < 6) {
+    if (password.value.length < 6) {
       setMessage("La contraseña debe tener al menos 6 caracteres");
       setVariant("danger");
       return false;
     }
-    setMessage("Login Exitoso");
+    //setMessage("Login Exitoso");
+    login(email.value, password.value);
     setVariant("success");
   };
 
@@ -43,7 +51,7 @@ const Login = () => {
                 <Form.Control
                   placeholder="Enter email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  {...email}
                 />
               </Form.Group>
             </ListGroup.Item>
@@ -54,14 +62,14 @@ const Login = () => {
                   type="password"
                   placeholder="Password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  {...password}
                 />
               </Form.Group>
             </ListGroup.Item>
-            <ListGroup.Item className="mb-3 d-flex justify-content-end">
-              <Button variant="link" type="submit" href="registro.html">
+            <ListGroup.Item className="mb-3 d-flex justify-content-center">
+              <Link variant="link" type="submit" to="/react-pizza-mamma-mia-1/register">
                 Quiere Registrarse?
-              </Button>
+              </Link>
               <Button variant="primary" type="submit">
                 Login
               </Button>
